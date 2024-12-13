@@ -8,7 +8,7 @@ export default function Heading() {
       <p className="font-bold">SCRIPTUM</p>
       <div className="flex gap-2">
         <ThemeSwitcher />
-        <UserButton showUserInfo={true} />
+        <UserButton />
       </div>
     </div>
   );

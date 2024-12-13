@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { SelectedTeamSwitcher, useUser } from '@stackframe/stack';
 
-export default function StoreSwitcher() {
+export default function TeamSwitcher() {
   const user = useUser({ or: 'redirect' });
   const userTeams = user.useTeams();
   const [currentStore, setCurrentStore] = useState(
