@@ -1,4 +1,4 @@
-import { NextRequest } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 
 import { localizationMiddleware } from './features/internationalization/localization-middleware';
 
@@ -6,5 +6,8 @@ import { localizationMiddleware } from './features/internationalization/localiza
 export const config = { matcher: ['/((?!api|_next|.*.svg$).*)'] };
 
 export function middleware(request: NextRequest) {
+  if (request.nextUrl.pathname.startsWith('/handler')) {
+    return NextResponse.next();
+  }
   return localizationMiddleware(request);
 }

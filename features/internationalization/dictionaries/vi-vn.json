@@ -1,9 +1,9 @@
 {
-    "counter": {
-      "decrement": "Giam",
-      "increment": "Tang"
-    },
-    "landing": {
-      "welcome": "Xin chao"
-    }
+  "counter": {
+    "decrement": "Giam",
+    "increment": "Tang"
+  },
+  "landing": {
+    "welcome": "Xin chao"
   }
+}

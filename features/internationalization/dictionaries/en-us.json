@@ -1,9 +1,9 @@
 {
-    "counter": {
-      "decrement": "Decrement",
-      "increment": "Increment"
-    },
-    "landing": {
-      "welcome": "Welcome"
-    }
+  "counter": {
+    "decrement": "Decrement",
+    "increment": "Increment"
+  },
+  "landing": {
+    "welcome": "Welcome"
   }
+}
