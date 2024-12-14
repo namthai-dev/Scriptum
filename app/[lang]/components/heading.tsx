@@ -4,12 +4,12 @@ import ThemeSwitcher from '@/components/theme-switcher';
 
 export default function Heading() {
   return (
-    <div className="flex items-center justify-between px-8 py-4">
+    <header className="flex items-center justify-between px-8 py-4">
       <p className="font-bold">SCRIPTUM</p>
-      <div className="flex gap-2">
+      <div className="flex gap-4">
         <ThemeSwitcher />
         <UserButton />
       </div>
-    </div>
+    </header>
   );
 }

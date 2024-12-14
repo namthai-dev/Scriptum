@@ -1,7 +1,7 @@
 import React from 'react';
 import { stackServerApp } from '@/stack';
 
-import Navigation from './components/navigation';
+import Sidebar from './components/sidebar';
 
 export default async function WorkspaceLayout({
   children,
@@ -18,9 +18,9 @@ export default async function WorkspaceLayout({
   }
 
   return (
-    <div className="flex h-screen">
-      <Navigation />
-      <main className="h-full flex-1 overflow-y-auto">{children}</main>
+    <div className="container m-auto flex h-screen">
+      <Sidebar />
+      <main className="flex-1">{children}</main>
     </div>
   );
 }

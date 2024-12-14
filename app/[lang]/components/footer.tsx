@@ -4,9 +4,9 @@ import { Button } from '@/components/ui/button';
 
 export default function Footer() {
   return (
-    <div className="z-50 flex w-full items-center bg-background p-6">
+    <footer className="flex items-center justify-between p-6">
       <p className="font-bold">SCRIPTUM</p>
-      <div className="flex w-full items-center justify-end gap-x-2 text-muted-foreground">
+      <div className="flex items-center gap-2 text-muted-foreground">
         <Button variant="ghost" size="sm">
           Privacy Policy
         </Button>
@@ -14,6 +14,6 @@ export default function Footer() {
           Terms & Conditions
         </Button>
       </div>
-    </div>
+    </footer>
   );
 }

@@ -5,7 +5,7 @@ import Footer from './components/footer';
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen flex-col">
+    <div className="container mx-auto flex min-h-screen flex-col">
       <Heading />
       <Separator />
       <Heroes />
