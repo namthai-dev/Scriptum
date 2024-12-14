@@ -17,7 +17,7 @@ export default async function Heroes() {
       </p>
       {user && (
         <Button asChild>
-          <Link href="/teams">
+          <Link href="/workspace">
             Enter Scriptum <ArrowRight className="ml-2 h-4 w-4" />
           </Link>
         </Button>
