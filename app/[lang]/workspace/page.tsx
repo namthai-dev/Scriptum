@@ -1,8 +1,12 @@
 import React from 'react';
-import { stackServerApp } from '@/stack';
+
+import Editor from '@/components/editor';
 
 export default async function Page() {
-  const user = await stackServerApp.getUser();
-
-  return <div>{user?.selectedTeam?.displayName}</div>;
+  return (
+    <div className="h-screen p-4 dark:bg-[#1f1f1f]">
+      <p className="text-3xl">Document</p>
+      <Editor />
+    </div>
+  );
 }
