@@ -2,7 +2,6 @@ import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
 import { Locale } from '@/features/internationalization/i18n-config';
-import { stackServerApp } from '@/stack';
 
 import { Provider } from '@/components/provider';
 import { Toaster } from '@/components/ui/toaster';
@@ -37,7 +36,7 @@ export default async function RootLayout(
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Provider app={stackServerApp}>
+        <Provider>
           <Toaster />
           {children}
         </Provider>

@@ -1,23 +1,19 @@
-import { StackProvider, StackTheme } from '@stackframe/stack';
 import { ThemeProvider } from 'next-themes';
 import { ConvexClientProvider } from '@/components/convex-provider';
 
 export function Provider({
   children,
-  ...props
-}: React.ComponentProps<typeof StackProvider>) {
+}: React.ComponentProps<typeof ConvexClientProvider>) {
   return (
     <ConvexClientProvider>
-      <StackProvider {...props}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <StackTheme>{children}</StackTheme>
-        </ThemeProvider>
-      </StackProvider>
+      <ThemeProvider
+        attribute="class"
+        defaultTheme="system"
+        enableSystem
+        disableTransitionOnChange
+      >
+        {children}
+      </ThemeProvider>
     </ConvexClientProvider>
   );
 }

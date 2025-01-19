@@ -1,14 +1,11 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { stackServerApp } from '@/stack';
 
 import { Button } from '@/components/ui/button';
 import { ArrowRight } from 'lucide-react';
 
 export default async function Heroes() {
-  const user = await stackServerApp.getUser();
-
   return (
     <section className="flex flex-1 flex-col items-center justify-center gap-2">
       <div className="text-center">
@@ -17,14 +14,27 @@ export default async function Heroes() {
           Scriptum is the documentation and collaboration tool
         </p>
       </div>
-      {user && (
+      {true && (
         <Button asChild>
           <Link href="/workspace">
             Enter Scriptum <ArrowRight className="h-4 w-4" />
           </Link>
         </Button>
       )}
-      <Image src="/creative.svg" alt="creative" width={500} height={500} />
+      <Image
+        className="dark:hidden"
+        src="/creative.svg"
+        alt="creative"
+        width={500}
+        height={500}
+      />
+      <Image
+        className="hidden dark:block"
+        src="/creative-dark.svg"
+        alt="creative"
+        width={500}
+        height={500}
+      />
     </section>
   );
 }
