@@ -1,12 +1,19 @@
+'use client';
 import React from 'react';
+import { useConvexAuth } from 'convex/react';
 
 import Sidebar from './components/sidebar';
+import { redirect } from 'next/navigation';
 
-export default async function WorkspaceLayout({
+export default function WorkspaceLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const { isAuthenticated, isLoading } = useConvexAuth();
+  if (!isAuthenticated && !isLoading) {
+    redirect('/');
+  }
   return (
     <div className="container m-auto flex h-screen">
       <Sidebar />

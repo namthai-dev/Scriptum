@@ -1,11 +1,13 @@
+'use client';
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { Authenticated } from 'convex/react';
 
 import { Button } from '@/components/ui/button';
 import { ArrowRight } from 'lucide-react';
 
-export default async function Heroes() {
+export default function Heroes() {
   return (
     <section className="flex flex-1 flex-col items-center justify-center gap-2">
       <div className="text-center">
@@ -14,13 +16,13 @@ export default async function Heroes() {
           Scriptum is the documentation and collaboration tool
         </p>
       </div>
-      {true && (
+      <Authenticated>
         <Button asChild>
           <Link href="/workspace">
             Enter Scriptum <ArrowRight className="h-4 w-4" />
           </Link>
         </Button>
-      )}
+      </Authenticated>
       <Image
         className="dark:hidden"
         src="/creative.svg"
