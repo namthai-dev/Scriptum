@@ -1,9 +1,10 @@
 'use client';
 import React from 'react';
 import { useConvexAuth } from 'convex/react';
+import { redirect } from 'next/navigation';
 
 import Sidebar from './components/sidebar';
-import { redirect } from 'next/navigation';
+import Spinner from '@/components/spinner';
 
 export default function WorkspaceLayout({
   children,
@@ -11,9 +12,19 @@ export default function WorkspaceLayout({
   children: React.ReactNode;
 }) {
   const { isAuthenticated, isLoading } = useConvexAuth();
+
   if (!isAuthenticated && !isLoading) {
     redirect('/');
   }
+
+  if (isLoading) {
+    return (
+      <div className="flex h-screen items-center justify-center">
+        <Spinner size="lg" />
+      </div>
+    );
+  }
+
   return (
     <div className="container m-auto flex h-screen">
       <Sidebar />

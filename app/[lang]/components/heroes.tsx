@@ -2,9 +2,11 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Authenticated } from 'convex/react';
+import { Authenticated, AuthLoading } from 'convex/react';
 
 import { Button } from '@/components/ui/button';
+import Spinner from '@/components/spinner';
+
 import { ArrowRight } from 'lucide-react';
 
 export default function Heroes() {
@@ -16,6 +18,9 @@ export default function Heroes() {
           Scriptum is the documentation and collaboration tool
         </p>
       </div>
+      <AuthLoading>
+        <Spinner size="lg" />
+      </AuthLoading>
       <Authenticated>
         <Button asChild>
           <Link href="/workspace">
