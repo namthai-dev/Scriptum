@@ -1,10 +1,12 @@
+'use client';
 import React from 'react';
+import dynamic from 'next/dynamic';
 
-import Editor from '@/components/editor';
+const Editor = dynamic(() => import('@/components/editor'), { ssr: false });
 
-export default async function Page() {
+export default function Page() {
   return (
-    <div className="h-full dark:bg-[#1f1f1f]">
+    <div className="h-full">
       <p className="ml-12 text-3xl">Document</p>
       <Editor />
     </div>
