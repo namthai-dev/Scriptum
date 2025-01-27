@@ -4,7 +4,7 @@ import './globals.css';
 import { Locale } from '@/features/internationalization/i18n-config';
 
 import { Provider } from '@/components/provider';
-import { Toaster } from '@/components/ui/toaster';
+import { Toaster } from '@/components/ui/sonner';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',

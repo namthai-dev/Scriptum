@@ -4,13 +4,16 @@ import React, { ComponentRef, useEffect, useRef, useState } from 'react';
 import { useMediaQuery } from 'usehooks-ts';
 import { usePathname } from 'next/navigation';
 import { UserButton } from '@clerk/nextjs';
+import { useTheme } from 'next-themes';
 
 import OrganizationSwitcher from '@/components/organization-switcher';
 import ThemeSwitcher from '@/components/theme-switcher';
+
 import { ChevronsLeft, MenuIcon } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 export default function Sidebar() {
+  const { theme } = useTheme();
   const pathname = usePathname();
   const isMobile = useMediaQuery('(max-width: 768px)');
 
@@ -108,7 +111,9 @@ export default function Sidebar() {
           isMobile && 'w-0',
         )}
       >
-        <OrganizationSwitcher />
+        <div className="p-3">
+          <OrganizationSwitcher />
+        </div>
         <div ref={navBarRef} className={cn('flex-1')}>
           Other tools
         </div>
@@ -127,8 +132,13 @@ export default function Sidebar() {
           onClick={resetWidth}
           className="absolute right-0 top-0 h-full w-1 cursor-ew-resize bg-primary/10 opacity-0 transition group-hover/sidebar:opacity-100"
         />
-        <div className="flex items-center justify-between">
-          <UserButton showName />
+        <div className="flex items-center justify-between p-3">
+          <UserButton
+            showName
+            appearance={{
+              variables: { colorText: theme === 'light' ? 'black' : 'white' },
+            }}
+          />
           <ThemeSwitcher />
         </div>
       </aside>
