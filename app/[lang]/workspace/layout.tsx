@@ -26,7 +26,7 @@ export default function WorkspaceLayout({
   }
 
   return (
-    <div className="container m-auto flex h-screen">
+    <div className="flex h-screen">
       <Sidebar />
       <main className="flex-1">{children}</main>
     </div>
