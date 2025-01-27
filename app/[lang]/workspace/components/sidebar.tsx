@@ -11,11 +11,14 @@ import ThemeSwitcher from '@/components/theme-switcher';
 
 import { ChevronsLeft, MenuIcon } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { useQuery } from 'convex/react';
+import { api } from '@/convex/_generated/api';
 
 export default function Sidebar() {
   const { theme } = useTheme();
   const pathname = usePathname();
   const isMobile = useMediaQuery('(max-width: 768px)');
+  const documents = useQuery(api.documents.get);
 
   const isResettingRef = useRef(false);
   const sideBarRef = useRef<ComponentRef<'aside'>>(null);
@@ -114,8 +117,10 @@ export default function Sidebar() {
         <div className="p-3">
           <OrganizationSwitcher />
         </div>
-        <div ref={navBarRef} className={cn('flex-1')}>
-          Other tools
+        <div className={cn('mt-4 flex-1')}>
+          {documents?.map(document => (
+            <p key={document._id}>{document.title}</p>
+          ))}
         </div>
         <button
           type="button"
