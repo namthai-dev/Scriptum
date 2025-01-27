@@ -9,16 +9,25 @@ import { useTheme } from 'next-themes';
 import OrganizationSwitcher from '@/components/organization-switcher';
 import ThemeSwitcher from '@/components/theme-switcher';
 
-import { ChevronsLeft, MenuIcon } from 'lucide-react';
+import {
+  ChevronsLeft,
+  MenuIcon,
+  PlusCircleIcon,
+  Search,
+  Settings,
+} from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { useQuery } from 'convex/react';
 import { api } from '@/convex/_generated/api';
+import Item from './item';
+import { useMutation } from 'convex/react';
+import { toast } from 'sonner';
+import DocumentList from './document-list';
 
 export default function Sidebar() {
   const { theme } = useTheme();
   const pathname = usePathname();
   const isMobile = useMediaQuery('(max-width: 768px)');
-  const documents = useQuery(api.documents.get);
+  const create = useMutation(api.documents.create);
 
   const isResettingRef = useRef(false);
   const sideBarRef = useRef<ComponentRef<'aside'>>(null);
@@ -89,6 +98,15 @@ export default function Sidebar() {
     }
   };
 
+  const handleCreate = () => {
+    const promise = create({ title: 'Untitled' });
+    toast.promise(promise, {
+      loading: 'Creating a new note...',
+      success: 'A new note created!',
+      error: 'Failed to create new note.',
+    });
+  };
+
   useEffect(() => {
     if (isMobile) {
       collapse();
@@ -117,10 +135,13 @@ export default function Sidebar() {
         <div className="p-3">
           <OrganizationSwitcher />
         </div>
-        <div className={cn('mt-4 flex-1')}>
-          {documents?.map(document => (
-            <p key={document._id}>{document.title}</p>
-          ))}
+        <div className="flex-1">
+          <Item label="Search" icon={Search} isSearch onClick={() => {}} />
+          <Item label="Settings" icon={Settings} onClick={() => {}} />
+          <Item label="New page" icon={PlusCircleIcon} onClick={handleCreate} />
+          <div className="mt-4">
+            <DocumentList />
+          </div>
         </div>
         <button
           type="button"
