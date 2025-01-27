@@ -12,9 +12,11 @@ import ThemeSwitcher from '@/components/theme-switcher';
 import {
   ChevronsLeft,
   MenuIcon,
+  Plus,
   PlusCircleIcon,
   Search,
   Settings,
+  Trash,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { api } from '@/convex/_generated/api';
@@ -22,6 +24,12 @@ import Item from './item';
 import { useMutation } from 'convex/react';
 import { toast } from 'sonner';
 import DocumentList from './document-list';
+import {
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+} from '@/components/ui/popover';
+import TrashBox from './trash-box';
 
 export default function Sidebar() {
   const { theme } = useTheme();
@@ -127,7 +135,7 @@ export default function Sidebar() {
       <aside
         ref={sideBarRef}
         className={cn(
-          'group/sidebar relative z-50 flex w-60 flex-col justify-between overflow-y-auto bg-secondary',
+          'group/sidebar relative z-40 flex w-60 flex-col justify-between overflow-y-auto bg-secondary',
           isResetting && 'transition-all duration-300 ease-in-out',
           isMobile && 'w-0',
         )}
@@ -141,7 +149,19 @@ export default function Sidebar() {
           <Item label="New page" icon={PlusCircleIcon} onClick={handleCreate} />
           <div className="mt-4">
             <DocumentList />
+            <Item label="Add a page" icon={Plus} onClick={handleCreate} />
           </div>
+          <Popover>
+            <PopoverTrigger className="mt-4 w-full">
+              <Item label="Trash" icon={Trash} />
+            </PopoverTrigger>
+            <PopoverContent
+              className="w-72 p-0"
+              side={isMobile ? 'bottom' : 'right'}
+            >
+              <TrashBox />
+            </PopoverContent>
+          </Popover>
         </div>
         <button
           type="button"
@@ -171,7 +191,7 @@ export default function Sidebar() {
       <div
         ref={navBarRef}
         className={cn(
-          'w-[calc(100% - 240px)] absolute left-60 top-0 z-50',
+          'w-[calc(100% - 240px)] absolute left-60 top-0 z-40',
           isResetting && 'transition-all duration-300 ease-in-out',
           isMobile && 'left-0 w-full',
         )}
