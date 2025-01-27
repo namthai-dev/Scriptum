@@ -7,7 +7,6 @@ import { UserButton } from '@clerk/nextjs';
 import { useTheme } from 'next-themes';
 
 import OrganizationSwitcher from '@/components/organization-switcher';
-import ThemeSwitcher from '@/components/theme-switcher';
 
 import {
   ChevronsLeft,
@@ -30,12 +29,17 @@ import {
   PopoverContent,
 } from '@/components/ui/popover';
 import TrashBox from './trash-box';
+import { useSearch } from '@/hooks/use-search';
+import { useSettings } from '@/hooks/use-settings';
 
 export default function Sidebar() {
   const { theme } = useTheme();
   const pathname = usePathname();
   const isMobile = useMediaQuery('(max-width: 768px)');
   const create = useMutation(api.documents.create);
+
+  const search = useSearch();
+  const settings = useSettings();
 
   const isResettingRef = useRef(false);
   const sideBarRef = useRef<ComponentRef<'aside'>>(null);
@@ -144,8 +148,17 @@ export default function Sidebar() {
           <OrganizationSwitcher />
         </div>
         <div className="flex-1">
-          <Item label="Search" icon={Search} isSearch onClick={() => {}} />
-          <Item label="Settings" icon={Settings} onClick={() => {}} />
+          <Item
+            label="Search"
+            icon={Search}
+            isSearch
+            onClick={() => search.toggle()}
+          />
+          <Item
+            label="Settings"
+            icon={Settings}
+            onClick={() => settings.toggle()}
+          />
           <Item label="New page" icon={PlusCircleIcon} onClick={handleCreate} />
           <div className="mt-4">
             <DocumentList />
@@ -185,7 +198,6 @@ export default function Sidebar() {
               variables: { colorText: theme === 'light' ? 'black' : 'white' },
             }}
           />
-          <ThemeSwitcher />
         </div>
       </aside>
       <div

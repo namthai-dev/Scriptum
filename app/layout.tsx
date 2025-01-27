@@ -3,8 +3,9 @@ import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
 import { Locale } from '@/features/internationalization/i18n-config';
 
-import { Provider } from '@/components/provider';
 import { Toaster } from '@/components/ui/sonner';
+import { Provider } from '@/components/provider';
+import { ModalProvider } from '@/components/modal-provider';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -38,6 +39,7 @@ export default async function RootLayout(
       >
         <Provider>
           <Toaster position="bottom-center" />
+          <ModalProvider />
           {children}
         </Provider>
       </body>
