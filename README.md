@@ -5,7 +5,7 @@ notes and collaborate seamlessly with others. Built using modern web
 technologies, Scriptum combines the best of simplicity and functionality to
 create an optimal note-taking and collaborative experience.
 
-Live demo: https://scriptum-git-main-namthai-devs-projects.vercel.app/
+Live demo: https://scriptum-delta.vercel.app/
 
 ## Features
 
