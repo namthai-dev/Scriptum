@@ -1,6 +1,6 @@
 'use client';
 import Image from 'next/image';
-import { useUser } from '@clerk/nextjs';
+import { useOrganization, useUser } from '@clerk/nextjs';
 
 import { Button } from '@/components/ui/button';
 import { CirclePlusIcon } from 'lucide-react';
@@ -11,9 +11,13 @@ import { api } from '@/convex/_generated/api';
 export default function Page() {
   const { user } = useUser();
   const create = useMutation(api.documents.create);
+  const { organization } = useOrganization();
 
   const handleCreate = () => {
-    const promise = create({ title: 'Untitled' });
+    const promise = create({
+      title: 'Untitled',
+      orgId: organization?.id as string,
+    });
     toast.promise(promise, {
       loading: 'Creating a new note...',
       success: 'A new note created!',

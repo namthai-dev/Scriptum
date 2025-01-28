@@ -26,7 +26,7 @@ export default function Banner({ documentId }: BannerProps) {
       error: 'Failed to remove note.',
     });
 
-    router.push('/workspace');
+    router.push('/documents');
   };
 
   const handleRestore = () => {

@@ -1,7 +1,7 @@
-import Heading from './components/heading';
 import { Separator } from '@/components/ui/separator';
-import Heroes from './components/heroes';
-import Footer from './components/footer';
+import Heading from './_components/heading';
+import Heroes from './_components/heroes';
+import Footer from './_components/footer';
 
 export default function Home() {
   return (

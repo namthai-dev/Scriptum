@@ -26,7 +26,7 @@ export default function TrashBox() {
   });
 
   const handleClick = (documentId: string) => {
-    router.push(`/workspace/${params.workspaceId}/documents/${documentId}`);
+    router.push(`/documents/${documentId}`);
   };
 
   const handleRestore = (
@@ -52,7 +52,7 @@ export default function TrashBox() {
       error: ' Failed to delete note.',
     });
 
-    if (params.documentId === documentId) router.push('/workspace');
+    if (params.documentId === documentId) router.push('/documents');
   };
 
   if (documents === undefined) {

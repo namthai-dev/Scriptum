@@ -11,7 +11,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { api } from '@/convex/_generated/api';
 import { Id } from '@/convex/_generated/dataModel';
 import { cn } from '@/lib/utils';
-import { useUser } from '@clerk/nextjs';
+import { useOrganization, useUser } from '@clerk/nextjs';
 import { useMutation } from 'convex/react';
 import {
   ChevronDown,
@@ -49,6 +49,7 @@ export default function Item({
   onClick,
 }: ItemProps) {
   const { user } = useUser();
+  const { organization } = useOrganization();
   const create = useMutation(api.documents.create);
   const archive = useMutation(api.documents.archive);
 
@@ -61,11 +62,13 @@ export default function Item({
 
   const handleCreate = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     e.stopPropagation();
-    const promise = create({ title: 'Untitled', parentDocument: id }).then(
-      () => {
-        if (!expanded) onExpand?.();
-      },
-    );
+    const promise = create({
+      title: 'Untitled',
+      parentDocument: id,
+      orgId: organization?.id as string,
+    }).then(() => {
+      if (!expanded) onExpand?.();
+    });
 
     toast.promise(promise, {
       loading: 'Creating a new note...',

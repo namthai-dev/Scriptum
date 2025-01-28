@@ -35,7 +35,7 @@ export default function Menu({ documentId }: MenuProps) {
       error: 'Failed to move note.',
     });
 
-    router.push('/workspace');
+    router.push('/documents');
   };
 
   return (

@@ -3,7 +3,7 @@
 import React, { ComponentRef, useEffect, useRef, useState } from 'react';
 import { useMediaQuery } from 'usehooks-ts';
 import { useParams, usePathname } from 'next/navigation';
-import { UserButton } from '@clerk/nextjs';
+import { useOrganization, UserButton } from '@clerk/nextjs';
 import { useTheme } from 'next-themes';
 
 import OrganizationSwitcher from '@/components/organization-switcher';
@@ -41,6 +41,7 @@ export default function Sidebar() {
   const create = useMutation(api.documents.create);
   const params = useParams();
   const router = useRouter();
+  const { organization } = useOrganization();
 
   const search = useSearch();
   const settings = useSettings();
@@ -115,8 +116,11 @@ export default function Sidebar() {
   };
 
   const handleCreate = () => {
-    const promise = create({ title: 'Untitled' }).then(documentId => {
-      router.push(`/workspace/${params.workspaceId}/documents/${documentId}`);
+    const promise = create({
+      title: 'Untitled',
+      orgId: organization?.id as string,
+    }).then(documentId => {
+      router.push(`/documents/${documentId}`);
     });
     toast.promise(promise, {
       loading: 'Creating a new note...',

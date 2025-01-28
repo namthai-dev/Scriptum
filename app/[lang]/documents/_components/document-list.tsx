@@ -8,6 +8,7 @@ import { useState } from 'react';
 import Item from './item';
 import { cn } from '@/lib/utils';
 import { FileIcon } from 'lucide-react';
+import { useOrganization } from '@clerk/nextjs';
 
 interface DocumentListProps {
   parentDocumentId?: Id<'documents'>;
@@ -21,9 +22,13 @@ export default function DocumentList({
 }: DocumentListProps) {
   const params = useParams();
   const router = useRouter();
+  const { organization } = useOrganization();
+
   const [expanded, setExpanded] = useState<Record<string, boolean>>({});
+
   const documents = useQuery(api.documents.getSidebar, {
     parentDocument: parentDocumentId,
+    orgId: organization?.id || '',
   });
 
   const handleExpand = (documentId: string) => {
@@ -34,7 +39,7 @@ export default function DocumentList({
   };
 
   const handleRedirect = (documentId: string) => {
-    router.push(`/workspace/${params.workspaceId}/documents/${documentId}`);
+    router.push(`/documents/${documentId}`);
   };
 
   //   Loading state

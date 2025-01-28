@@ -1,11 +1,11 @@
 import { v } from 'convex/values';
 import { mutation, query } from './_generated/server';
 import { Doc, Id } from './_generated/dataModel';
-import { aw } from 'vitest/dist/chunks/reporters.D7Jzd9GS.js';
 
 export const create = mutation({
   args: {
     title: v.string(),
+    orgId: v.string(),
     parentDocument: v.optional(v.id('documents')),
   },
   handler: async (ctx, args) => {
@@ -18,6 +18,7 @@ export const create = mutation({
       title: args.title,
       parentDocument: args.parentDocument,
       userId,
+      orgId: args.orgId,
       isArchived: false,
       isPublished: false,
     });
@@ -35,6 +36,7 @@ export const get = query({
 
 export const getSidebar = query({
   args: {
+    orgId: v.string(),
     parentDocument: v.optional(v.id('documents')),
   },
   handler: async (ctx, args) => {
@@ -44,8 +46,11 @@ export const getSidebar = query({
     const userId = identity.subject;
     return await ctx.db
       .query('documents')
-      .withIndex('by_user_parent', q =>
-        q.eq('userId', userId).eq('parentDocument', args.parentDocument),
+      .withIndex('by_user_org_parent', q =>
+        q
+          .eq('userId', userId)
+          .eq('orgId', args.orgId)
+          .eq('parentDocument', args.parentDocument),
       )
       .filter(q => q.eq(q.field('isArchived'), false))
       .order('asc')
