@@ -64,5 +64,5 @@ export default function CoverImage({ url, preview }: CoverImageProps) {
 }
 
 CoverImage.Skeleton = function CoverImageSkeleton() {
-  return <Skeleton className="h-[12vh] w-full" />;
+  return <Skeleton className="h-[32vh] w-full" />;
 };

@@ -10,6 +10,7 @@ import {
 } from '@blocknote/mantine';
 import '@blocknote/core/fonts/inter.css';
 import '@blocknote/mantine/style.css';
+import { useEdgeStore } from '@/lib/edgestore';
 
 const lightTheme = {
   ...lightDefaultTheme,
@@ -29,14 +30,37 @@ const customTheme = {
   dark: darkTheme,
 };
 
-export default function Editor() {
+interface EditorProps {
+  onChange: (value: string) => void;
+  initialContent?: string;
+  editable?: boolean;
+}
+export default function Editor({
+  onChange,
+  editable,
+  initialContent,
+}: EditorProps) {
   const { theme } = useTheme();
-  const editor = useCreateBlockNote();
+  const { edgestore } = useEdgeStore();
+
+  const handleUpload = async (file: File) => {
+    const res = await edgestore.publicFiles.upload({ file });
+    return res.url;
+  };
+
+  const editor = useCreateBlockNote({
+    initialContent: initialContent ? JSON.parse(initialContent) : undefined,
+    uploadFile: handleUpload,
+  });
 
   return (
     <BlockNoteView
       editor={editor}
       theme={theme === 'light' ? customTheme.light : customTheme.dark}
+      editable={editable}
+      onChange={() => {
+        onChange(JSON.stringify(editor.document, null, 2));
+      }}
     />
   );
 }
