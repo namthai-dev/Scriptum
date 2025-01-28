@@ -7,6 +7,7 @@ import { useQuery } from 'convex/react';
 import { api } from '@/convex/_generated/api';
 
 import ToolBar from '@/components/tool-bar';
+import CoverImage from './components/cover-image';
 // const Editor = dynamic(() => import('./components/editor'), { ssr: false });
 
 export default function Page() {
@@ -24,7 +25,8 @@ export default function Page() {
   }
 
   return (
-    <div className="pt-40">
+    <div className="pb-40">
+      <CoverImage url={document.coverImage} />
       <div className="mx-auto md:max-w-3xl lg:max-w-4xl">
         <ToolBar initialData={document} />
       </div>
