@@ -34,7 +34,7 @@ export default function DocumentList({
   };
 
   const handleRedirect = (documentId: string) => {
-    router.push(`/workspace/documents/${documentId}`);
+    router.push(`/workspace/${params.workspaceId}/documents/${documentId}`);
   };
 
   //   Loading state
