@@ -26,7 +26,7 @@ export default function TrashBox() {
   });
 
   const handleClick = (documentId: string) => {
-    router.push(`/workspace/documents/${documentId}`);
+    router.push(`/workspace/${params.workspaceId}/documents/${documentId}`);
   };
 
   const handleRestore = (

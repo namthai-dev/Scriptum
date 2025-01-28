@@ -20,14 +20,14 @@ export default function Page() {
   });
 
   useEffect(() => {
-    if (isLoaded) {
+    if (isLoaded && isAuthenticated) {
       const mem = userMemberships.data[0];
       setActive({ organization: mem.id }).then(() => {
         redirect(`/workspace/${mem.id}`);
       });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isLoaded]);
+  }, [isLoaded, isAuthenticated]);
 
   if (isLoading || !isLoaded) {
     return (
