@@ -48,7 +48,7 @@ export const getSidebar = query({
         q.eq('userId', userId).eq('parentDocument', args.parentDocument),
       )
       .filter(q => q.eq(q.field('isArchived'), false))
-      .order('desc')
+      .order('asc')
       .collect();
   },
 });

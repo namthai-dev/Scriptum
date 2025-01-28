@@ -32,6 +32,7 @@ import TrashBox from './trash-box';
 import { useSearch } from '@/hooks/use-search';
 import { useSettings } from '@/hooks/use-settings';
 import Navbar from './navbar';
+import { useRouter } from 'next/navigation';
 
 export default function Sidebar() {
   const { theme } = useTheme();
@@ -39,6 +40,7 @@ export default function Sidebar() {
   const isMobile = useMediaQuery('(max-width: 768px)');
   const create = useMutation(api.documents.create);
   const params = useParams();
+  const router = useRouter();
 
   const search = useSearch();
   const settings = useSettings();
@@ -113,7 +115,9 @@ export default function Sidebar() {
   };
 
   const handleCreate = () => {
-    const promise = create({ title: 'Untitled' });
+    const promise = create({ title: 'Untitled' }).then(documentId => {
+      router.push(`/workspace/${params.workspaceId}/documents/${documentId}`);
+    });
     toast.promise(promise, {
       loading: 'Creating a new note...',
       success: 'A new note created!',
