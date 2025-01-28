@@ -197,7 +197,7 @@ export default function Sidebar() {
           onClick={resetWidth}
           className="absolute right-0 top-0 h-full w-1 cursor-ew-resize bg-primary/10 opacity-0 transition group-hover/sidebar:opacity-100"
         />
-        <div className="flex items-center justify-between p-3">
+        <div className="flex items-center justify-center p-3">
           <UserButton
             showName
             appearance={{
