@@ -1,14 +1,34 @@
 'use client';
 import React from 'react';
-import dynamic from 'next/dynamic';
+// import dynamic from 'next/dynamic';
+import { useParams } from 'next/navigation';
+import { Id } from '@/convex/_generated/dataModel';
+import { useQuery } from 'convex/react';
+import { api } from '@/convex/_generated/api';
 
-const Editor = dynamic(() => import('./components/editor'), { ssr: false });
+import ToolBar from '@/components/tool-bar';
+// const Editor = dynamic(() => import('./components/editor'), { ssr: false });
 
 export default function Page() {
+  const params = useParams();
+  const document = useQuery(api.documents.getById, {
+    documentId: params.documentId as Id<'documents'>,
+  });
+
+  if (document === undefined) {
+    return <div>Loading...</div>;
+  }
+
+  if (document === null) {
+    return <div>Not found</div>;
+  }
+
   return (
-    <div className="h-full">
-      <p className="ml-12 text-3xl">Title</p>
-      <Editor />
+    <div className="pt-40">
+      <div className="mx-auto md:max-w-3xl lg:max-w-4xl">
+        <ToolBar initialData={document} />
+      </div>
+      {/* <Editor /> */}
     </div>
   );
 }

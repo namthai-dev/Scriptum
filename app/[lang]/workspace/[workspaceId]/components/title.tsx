@@ -52,7 +52,7 @@ export default function Title({ initialData }: TitleProps) {
           variant="ghost"
           className="h-auto p-1 font-normal"
         >
-          <span className="truncate">{title}</span>
+          <span className="truncate">{initialData.title}</span>
         </Button>
       )}
     </div>
