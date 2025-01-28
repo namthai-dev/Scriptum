@@ -7,9 +7,12 @@ import { useMutation, useQuery } from 'convex/react';
 import { api } from '@/convex/_generated/api';
 
 import ToolBar from '@/components/tool-bar';
-import CoverImage from './components/cover-image';
+import CoverImage from '@/components/cover-image';
 import { Skeleton } from '@/components/ui/skeleton';
-const Editor = dynamic(() => import('./components/editor'), { ssr: false });
+
+const Editor = dynamic(() => import('@/components/editor'), {
+  ssr: false,
+});
 
 export default function Page() {
   const params = useParams();
@@ -49,11 +52,13 @@ export default function Page() {
       <div className="mx-auto md:max-w-3xl lg:max-w-4xl">
         <ToolBar initialData={document} />
       </div>
-      <Editor
-        editable
-        onChange={handleChange}
-        initialContent={document.content}
-      />
+      <div className="mx-auto md:max-w-3xl lg:max-w-4xl">
+        <Editor
+          editable
+          onChange={handleChange}
+          initialContent={document.content}
+        />
+      </div>
     </div>
   );
 }
