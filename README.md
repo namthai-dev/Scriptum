@@ -5,7 +5,7 @@ notes and collaborate seamlessly with others. Built using modern web
 technologies, Scriptum combines the best of simplicity and functionality to
 create an optimal note-taking and collaborative experience.
 
-Live demo: https://scriptum-delta.vercel.app/
+Live demo: https://scriptum-wnan.vercel.app/
 
 ## Features
 
@@ -51,7 +51,6 @@ Ensure you have the following installed on your local development environment:
    directory and configure the following variables:
 
    ```env
-    DATABASE_URL=<postgresql-db>
     NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=<clerk-public-key>
     CONVEX_DEPLOYMENT=<convex-deployment>
     NEXT_PUBLIC_CONVEX_URL=<convex-public-key>
