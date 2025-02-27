@@ -74,3 +74,9 @@ Ensure you have the following installed on your local development environment:
 - `npm run build` - Build the application for production.
 - `npm start` - Start the production server.
 - `npm run lint` - Lint your codebase.
+
+## Screenshots
+
+![Screen Shot 2025-02-27 at 23 11 00 PM](https://github.com/user-attachments/assets/d15413d5-c87e-432e-bfa2-7bb1ad67fc19)
+
+![Screen Shot 2025-02-27 at 23 12 30 PM](https://github.com/user-attachments/assets/503f950b-d392-4efb-8f64-1f1f3e343b73)
